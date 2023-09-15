@@ -1,4 +1,4 @@
-name: Simple Workflow
+name: Python Script Trigger
 
 on:
   push:
@@ -6,9 +6,17 @@ on:
       - main
 
 jobs:
-  print_message:
+  run_python_script:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print a message
-        run: echo "This is a simple GitHub Actions workflow!"
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Run Python Script
+        run: python Friend_teasing.py
